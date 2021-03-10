@@ -1,0 +1,70 @@
+<?php
+
+namespace App\Controller;
+
+use App\Model\Api;
+
+class ApiController
+{
+    public function index()
+    {
+        $pagina = $_GET['pagina'] ?? 1;
+        $Usuario = new Usuario();
+        $usuarios = $Usuario->listar((int) $pagina);
+        $paginacao = $usuarios['paginacao'];
+        $usuarios = $usuarios['data'];
+    }
+
+    public function entrar()
+    {
+        if (isset($_POST["usuario"]) && 
+            isset($_POST["senha"])            
+        ) {
+            $Usuario = new Usuario();
+            $resposta = $Usuario->entrar($_POST["usuario"],  $_POST["senha"]);
+        }
+    }
+
+    public function sair()
+    {
+        $Usuario = new Usuario();
+        $resposta = $Usuario->sair();
+    }
+
+    public function cadastro()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (Validation::input($_POST)) {
+                $Usuario = new Usuario();
+                $resposta = $Usuario->cadastro($_POST['email'], $_POST['usuario'],  $_POST['senha']);
+            } else {
+                $resposta = [
+                    'status' => 'erro', 
+                    'classe' => 'warning',
+                    'titulo' => 'Erro',
+                    'mensagem' => 'Todos os campos são obrigatórios: ' . implode(', ', array_keys($_POST))
+                ];
+            }
+        }
+    }
+
+    public function perfil($id)
+    {
+        $Usuario = new Usuario();
+        $usuario = $Usuario->perfil($id);
+    }
+
+    public function pesquisa()
+    {
+        if (isset($_POST['termo'])) {
+            $Usuario = new Usuario();
+            $usuarios = $Usuario->pesquisa($_POST['termo']);
+        }
+    }
+
+    public function instalar()
+    {
+        $Usuario = new Usuario();
+        $usuarios = $Usuario->instalar();
+    }
+}

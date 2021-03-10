@@ -1,0 +1,17 @@
+{
+    "name": "sistematico/php-rest-api",
+    "type": "project",
+    "license": "Unlicense",
+    "authors": [
+        {
+            "name": "Lucas Saliés Brum",
+            "email": "lucas@archlinux.com.br"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
