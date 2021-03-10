@@ -30,12 +30,12 @@ export default {
   },
   methods: {
     fetchUsers: function () {
-      // let headers = new Headers()
-      // headers.append('Access-Control-Allow-Origin', 'https://rest.lucasbrum.net');
-      // headers.append('Access-Control-Allow-Credentials', 'true');
-      // let options = { method: 'GET', headers: headers, mode: 'cors'}
+      let headers = new Headers()
+      headers.append('Access-Control-Allow-Origin', 'https://rest.lucasbrum.net');
+      headers.append('Access-Control-Allow-Credentials', 'true');
+      let options = { method: 'GET', headers: headers, mode: 'cors'}
       
-      fetch("https://api.lucasbrum.net/user/list")
+      fetch("https://api.lucasbrum.net/user/list", options)
         .then(json => {
           console.log(json)
           this.lista = JSON.stringify(json.data)
