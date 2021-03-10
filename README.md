@@ -9,6 +9,35 @@ Projeto de API REST usando o PHP.
 | [Back-End](/../../tree/backend) | :recycle: |
 | [Front-End](/../../tree/frontend) | :recycle: |
 
+## Nginx
+
+Sugestão de configuração do Nginx:
+
+```
+server {
+    listen 80;
+    listen [::]:80;
+    server_name rest.site.com;
+    return 301 https://rest.site.com$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+
+    ssl_certificate         /etc/letsencrypt/live/site.com/fullchain.pem;
+    ssl_certificate_key     /etc/letsencrypt/live/site.com/privkey.pem;
+
+    root /var/www/rest.site.com/dist;
+    index index.html;
+    server_name rest.site.com;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+```
+
 ## Setup do projeto
 ```
 npm install
