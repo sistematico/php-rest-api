@@ -5,13 +5,36 @@ Projeto de API REST usando o PHP.
 ## Ramificações
 
 | Ramificação                  |            | Status    |
-| ---------------------------- |:------------------:| ---------:|
-| [Back-End](/../../tree/backend)     |  | :recycle: |
-| [Front-End](/../../tree/frontend)     |                | :recycle: |
+| ---------------------------- | ---------:|
+| [Back-End](/../../tree/backend) | :recycle: |
+| [Front-End](/../../tree/frontend) | :recycle: |
+
+## Setup do projeto
+```
+npm install
+```
+
+### Compila e habilita o hot-reload para desenvolvimento
+```
+npm run serve
+```
+
+### Compila e minifica para produção
+```
+npm run build
+```
+
+### Executa o lint e fixes nos arquivos
+```
+npm run lint
+```
+
+### Customizar a configuração
+Veja [Referência para Configuração](https://cli.vuejs.org/config/).
 
 ## Contribua!
 
-- Viu algum erro ou tem alguma sugestão? Abra uma [issue](https://github.com/sistematico/php-mvc/issues/new)!
+- Viu algum erro ou tem alguma sugestão? Abra uma [issue](https://github.com/sistematico/php-rest-api/issues/new)!
 
 ## Contato
 
