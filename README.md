@@ -11,7 +11,7 @@ Projeto de API REST usando o PHP.
 
 ## Contribua!
 
-- Viu algum erro ou tem alguma sugestão? Abra uma [issue](https://github.com/sistematico/php-mvc/issues/new)!
+- Viu algum erro ou tem alguma sugestão? Abra uma [issue](https://github.com/sistematico/php-rest-api/issues/new)!
 
 ## Contato
 
