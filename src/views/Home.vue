@@ -25,9 +25,10 @@ export default {
   },
   methods: {
     fetchUsers: function () {
-      let headers = new Headers()
+      //let headers = new Headers()
+      //{ method: 'GET', header: headers, mode: 'no-cors'}
       
-      fetch("https://api.lucasbrum.net/user/list", { method: 'GET', header: headers, mode: 'no-cors'})
+      fetch("https://api.lucasbrum.net/user/list", {method: 'GET'})
         .then(json => {
           console.log(json)
           this.list = JSON.stringify(json)
