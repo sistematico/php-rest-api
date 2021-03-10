@@ -1,5 +1,7 @@
 # PHP REST API
 
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/sistematico/php-rest-api/Deploy?label=Github%20Action&logo=github&logoColor=white&style=flat-square)](https://github.com/sistematico/ptp-rest-api/actions?query=workflow%3ADeploy%20VueJS)
+
 Projeto de API REST usando o PHP.
 
 ## Ramificações

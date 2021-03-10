@@ -1,4 +1,4 @@
-name: Deploy VueJS App
+name: Deploy VueJS
 
 on: [push]
 
