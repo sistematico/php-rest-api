@@ -25,12 +25,15 @@ export default {
   },
   methods: {
     fetchUsers: function () {
-      fetch("https://api.lucasbrum.net/user/list").then((response) => {
-        return response.json().then((json) => {
-          console.log("JSON", json);
-          this.list = json
-        })
-      })
+      let headers = new Headers()
+      
+      fetch("https://api.lucasbrum.net/user/list", { method: 'GET', header: headers, mode: 'no-cors'})
+        .then(json => {
+          console.log(json)
+          this.list = JSON.stringify(json)
+        }).catch(error => {
+          console.log(error)
+        })    
     }
   }
 }
