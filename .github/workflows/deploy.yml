@@ -21,6 +21,6 @@ jobs:
           git checkout HEAD^ package.json
           git pull origin frontend
           # --no-package-lock
-          /usr/bin/node --optimize_for_size --max_old_space_size=128 --gc_interval=100 /usr/bin/npm install --no-optional --no-shrinkwrap &&
-          /usr/bin/node --optimize_for_size --max_old_space_size=128 --gc_interval=100 /usr/bin/npm run build &&
+          /usr/bin/node --optimize_for_size --max_old_space_size=256 --gc_interval=100 /usr/bin/npm install --no-optional --no-shrinkwrap &&
+          /usr/bin/node --optimize_for_size --max_old_space_size=256 --gc_interval=100 /usr/bin/npm run build &&
           mkdir -p html/ && rsync -av dist/ html/ --delete --exclude="txt/"
