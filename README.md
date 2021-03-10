@@ -1,13 +1,13 @@
-# PHP REST API
+# PHP REST API (Back-End)
 
-Projeto de API REST usando o PHP.
+Projeto de API REST usando o PHP(Back-End).
 
 ## Ramificações
 
-| Ramificação                  |            | Status    |
-| ---------------------------- |:------------------:| ---------:|
-| [Back-End](/../../tree/backend)     |  | :recycle: |
-| [Front-End](/../../tree/frontend)     |                | :recycle: |
+| Ramificação                  | Status    |
+| ---------------------------- | ---------:|
+| Back-End     | :recycle: |
+| [Front-End](/../../tree/frontend)  | :recycle: |
 
 ## Contribua!
 
