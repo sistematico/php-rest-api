@@ -41,13 +41,9 @@ class UserController
         }
     }
 
-    public function install()
+    public function index()
     {
-        $User = new User();
-        $user = $User->install();
-        Response::setResponse($user['sucess'], $user['statusCode'], $user['message']);
-        Response::send();
-        exit;
+        $this->list();
     }
 
     public function list()
@@ -85,6 +81,15 @@ class UserController
         $user = $User->delete($id);        
         Response::setResponse($user['sucess'], $user['statusCode'], $user['message']);
         Response::send();        
+        exit;
+    }
+
+    public function install()
+    {
+        $User = new User();
+        $user = $User->install();
+        Response::setResponse($user['sucess'], $user['statusCode'], $user['message']);
+        Response::send();
         exit;
     }
 
