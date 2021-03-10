@@ -4,10 +4,10 @@ Projeto de API REST usando o PHP.
 
 ## Ramificações
 
-| Ramificação                  |            | Status    |
+| Ramificação                  | Status    |
 | ---------------------------- | ---------:|
 | [Back-End](/../../tree/backend) | :recycle: |
-| [Front-End](/../../tree/frontend) | :recycle: |
+| Front-End | :recycle: |
 
 ## Nginx
 
