@@ -35,6 +35,8 @@ class UserController
             }
             
         } else if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+
+        } else if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
             
         } else {
             $this->notAllowed();

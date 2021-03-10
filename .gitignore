@@ -1,3 +1,5 @@
-/vendor/
+vendor/
+dist/
 db/database.sqlite
 node_modules
+
