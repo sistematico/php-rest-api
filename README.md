@@ -9,6 +9,41 @@ Projeto de API REST usando o PHP(Back-End).
 | Back-End     | :recycle: |
 | [Front-End](/../../tree/frontend)  | :recycle: |
 
+## Nginx
+
+Sugestão de configuração do Nginx:
+
+```
+server {
+    listen 80;
+    listen [::]:80;
+    server_name api.site.com;
+    return 301 https://api.site.com$request_uri;
+}
+
+server {
+    listen                  443 ssl;
+    listen                  [::]:443 ssl;
+
+    ssl_certificate         /etc/letsencrypt/live/site.com/fullchain.pem;
+    ssl_certificate_key     /etc/letsencrypt/live/site.com/privkey.pem;
+
+    root                    /var/www/api.site.com/public;
+    index                   index.php;
+    server_name             api.site.com;
+
+    location / {
+        add_header 'Access-Control-Allow-Origin' '*';
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+    }
+}
+```
+
 ## Contribua!
 
 - Viu algum erro ou tem alguma sugestão? Abra uma [issue](https://github.com/sistematico/php-rest-api/issues/new)!
