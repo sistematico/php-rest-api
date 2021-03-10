@@ -11,4 +11,6 @@ define('CORE', APP . 'Core' . DIRECTORY_SEPARATOR);
 define('DB_FILE', ROOT . 'db' . DIRECTORY_SEPARATOR . 'database.sqlite');
 define('SQL_FILE', ROOT . 'sql' . DIRECTORY_SEPARATOR . 'database.sql');
 
+header("Access-Control-Allow-Origin: *");
+
 $app = new App\Core\Router();
