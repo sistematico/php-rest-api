@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS 'sessions' (
 
 CREATE TABLE IF NOT EXISTS 'users' (
   'id' INTEGER NOT NULL PRIMARY KEY,
-  'fullname' TEXT NOT NULL ,
+  'fullname' TEXT NOT NULL,
   'username' TEXT NOT NULL UNIQUE,
   'email' TEXT NOT NULL UNIQUE,
   'password' TEXT NOT NULL,

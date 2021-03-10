@@ -1,0 +1,22 @@
+name: Deploy
+
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy PHP REST API (Back-End)
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{secrets.SSH_HOST}}
+        username: ${{ secrets.SSH_USERNAME }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+          git clone -b backend git@github.com:sistematico/php-rest-api.git /var/www/api.lucasbrum.net
+          cd /var/www/api.lucasbrum.net
+          git checkout HEAD^ db/database.sqlite
+          git pull
+          composer install
+          composer dump-autoload -o

@@ -2,8 +2,6 @@
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use App\Core\Application;
-
 ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
@@ -13,4 +11,4 @@ define('CORE', APP . 'Core' . DIRECTORY_SEPARATOR);
 define('DB_FILE', ROOT . 'db' . DIRECTORY_SEPARATOR . 'database.sqlite');
 define('SQL_FILE', ROOT . 'sql' . DIRECTORY_SEPARATOR . 'database.sql');
 
-$app = new Application();
+$app = new App\Core\Router();

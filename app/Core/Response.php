@@ -12,7 +12,8 @@ class Response
         self::$response["httpStatusCode"] = $httpStatusCode;
         self::$response["message"] = $message;
         self::$response["cache"] = $cache;
-        self::$response["data"] = $data;
+        if (!empty($data))
+            self::$response["data"] = $data;
     }
 
     public static function send()
@@ -35,7 +36,8 @@ class Response
             $data['httpStatusCode'] = self::$response['httpStatusCode'];
             $data['success'] = self::$response['success'];
             $data['messages'] = self::$response['message'];
-            $data['data'] = self::$response['data'];
+            if (!empty(self::$response['data']))
+                $data['data'] = self::$response['data'];
         }
         echo json_encode($data);
     }
