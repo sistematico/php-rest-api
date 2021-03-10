@@ -32,9 +32,14 @@ server {
     index                   index.php;
     server_name             api.site.com;
 
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-XSS-Protection "1; mode=block";
+    add_header X-Content-Type-Options "nosniff";
+
     location / {
-        add_header 'Access-Control-Allow-Origin' '*';
-        try_files $uri $uri/ /index.php?$query_string;
+        #add_header 'Access-Control-Allow-Origin' '*';
+        add_header Access-Control-Allow-Origin $http_origin;
+        try_files /$uri /$uri/ /index.php?url=$uri&$args;
     }
 
     location ~ \.php$ {
