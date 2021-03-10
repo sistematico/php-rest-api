@@ -19,6 +19,7 @@ jobs:
           git checkout HEAD^ package-lock.json
           git checkout HEAD^ package.json
           git pull origin frontend
-          /usr/bin/node --optimize_for_size --max_old_space_size=128 --gc_interval=100 /usr/bin/npm install --no-optional --no-shrinkwrap --no-package-lock
-          /usr/bin/node --optimize_for_size --max_old_space_size=128 --gc_interval=100 /usr/bin/npm run build
+          # --no-package-lock
+          /usr/bin/node --optimize_for_size --max_old_space_size=128 --gc_interval=100 /usr/bin/npm install --no-optional --no-shrinkwrap &&
+          /usr/bin/node --optimize_for_size --max_old_space_size=128 --gc_interval=100 /usr/bin/npm run build &&
           mkdir -p html/ && rsync -av dist/ html/ --delete --exclude="txt/"
