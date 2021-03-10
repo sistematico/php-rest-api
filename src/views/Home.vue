@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     fetchUsers: function () {
-      fetch("https://api.lucasbrum.net").then((response) => {
+      fetch("https://api.lucasbrum.net/user/list").then((response) => {
         return response.json().then((json) => {
           console.log("JSON", json);
           this.list = json
