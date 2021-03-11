@@ -3,7 +3,12 @@
 //Access-Control-Allow-Origin : http://localhost:3000
 //header("Access-Control-Allow-Origin: *");
 
-header('Access-Control-Allow-Origin: *');
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+} else {
+    header('Access-Control-Allow-Origin: https://rest.lucasbrum.net');
+}
+
 header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, X-Auth-Token');
