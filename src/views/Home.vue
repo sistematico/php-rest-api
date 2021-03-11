@@ -1,28 +1,64 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-    <ul>
-      <li v-for="item in lista" :key="item">
-        {{ item.id }} - {{ item.fullname }} 
-      </li>
-    </ul>
-    
+  <div class="starter-template text-center py-5 px-3 home">
+    <h1>Usuários</h1>
+
+    <div class="alert alert-primary" role="alert" v-if="mensagens">
+      {{ mensagens }}
+    </div>
+
+    <form @submit.prevent="addUser()" class="row g-3 justify-content-center">
+      <div class="col-auto">
+        <label for="nome" class="visually-hidden">Nome</label>
+        <input v-model="nome" type="text" class="form-control" id="nome" placeholder="Fulano de Tal">
+      </div>
+      <div class="col-auto">
+        <label for="usuario" class="visually-hidden">Usuário</label>
+        <input v-model="usuario" type="text" class="form-control" id="usuario" placeholder="usuario">
+      </div>
+      <div class="col-auto">
+        <label for="email" class="visually-hidden">E-mail</label>
+        <input v-model="email" type="text" class="form-control" id="email" placeholder="usuario@gmail.com">
+      </div>
+      <div class="col-auto">
+        <label for="senha" class="visually-hidden">Email</label>
+        <input v-model="senha" type="password" class="form-control" id="senha" placeholder="Senha">
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Enviar</button>
+      </div>
+    </form>
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Usuário</th>
+        <th scope="col">E-mail</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="item in lista" :key="item">
+        <td scope="row">{{ item.id }}</td>
+        <td>{{ item.fullname }}</td>
+        <td>{{ item.username }}</td>
+        <td>{{ item.email }}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </template>
-
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
   name: "Home",
-  components: {
-    HelloWorld,
-  },
   data() {
     return {
       lista: [],
+      nome: '',
+      usuario: '',
+      email: '',
+      senha: '',
+      mensagens: null
     };
   },
   created: function () {
@@ -31,17 +67,32 @@ export default {
   methods: {
     fetchUsers: function () {
       let headers = new Headers()
-      //headers.append('Access-Control-Allow-Origin', 'https://rest.lucasbrum.net');
-      //headers.append('Access-Control-Allow-Credentials', 'true');
-      let options = { method: 'GET', headers: headers, mode: 'cors'}
-      
-      fetch("https://api.lucasbrum.net/user/list", options)
+
+      fetch("https://api.lucasbrum.net/user/list", { method: 'GET', headers: headers, mode: 'cors'})
         .then(response => response.json())
         .then(data => {
           this.lista = data.data
         }).catch(error => {
           console.log(error)
         })    
+    },
+    addUser: function () {
+        const postOptions = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fullname: this.nome,
+            username: this.usuario,
+            email: this.email,
+            password: this.senha
+          })
+        };
+
+        fetch("https://api.lucasbrum.net/user/insert", postOptions)
+            .then(response => response.json())
+            .then(data => {
+              this.mensagens = data.messages
+            })
     }
   }
 }
