@@ -102,7 +102,7 @@ export default {
 
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
-        headers.append('Authorization', 'Basic ' + base64.encode(username + ":" + password));
+        headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
         headers.append('Origin', 'http://localhost:3000');
 
         fetch('https://api.lucasbrum.net/user/insert', {
