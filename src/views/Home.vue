@@ -76,7 +76,7 @@ export default {
           console.log(error)
         })    
     },
-    addUser: function () {
+    addUser2: function () {
         const postOptions = {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -93,7 +93,28 @@ export default {
             .then(data => {
               this.mensagens = data.messages
             })
-    }
+    },
+    addUser: function () {
+
+        let username = 'lucas', password = '123'
+
+        let headers = new Headers();
+
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        headers.append('Authorization', 'Basic ' + base64.encode(username + ":" + password));
+        headers.append('Origin', 'http://localhost:3000');
+
+        fetch('https://api.lucasbrum.net/user/insert', {
+          mode: 'cors',
+          credentials: 'include',
+          method: 'POST',
+          headers: headers
+        })
+            .then(response => response.json())
+            .then(json => console.log(json))
+            .catch(error => console.log('Authorization failed : ' + error.message));
+      }
   }
 }
 </script>
