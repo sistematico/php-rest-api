@@ -15,7 +15,8 @@
 //header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, X-Auth-Token, Authorization, X-Requested-With');
 
 if ($_SERVER['REQUEST_METHOD'] == "OPTIONS") {
-    header('Access-Control-Allow-Origin: *');
+    //header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Origin: https://rest.lucasbrum.net');
     header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization");
     header("HTTP/1.1 200 OK");
     die();
