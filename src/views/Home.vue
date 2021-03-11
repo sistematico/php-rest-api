@@ -109,10 +109,19 @@ export default {
           mode: 'cors',
           credentials: 'include',
           method: 'POST',
-          headers: headers
+          headers: headers,
+          body: JSON.stringify({
+            fullname: this.nome,
+            username: this.usuario,
+            email: this.email,
+            password: this.senha
+          })
         })
             .then(response => response.json())
-            .then(json => console.log(json))
+            .then(json => {
+              console.log(json)
+              this.mensagens = json.messages
+            })
             .catch(error => console.log('Authorization failed : ' + error.message));
       }
   }
