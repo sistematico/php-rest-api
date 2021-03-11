@@ -1,5 +1,10 @@
 <?php
 
+//header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 ini_set('display_errors', 'On');
@@ -10,7 +15,5 @@ define('APP', ROOT . 'app' . DIRECTORY_SEPARATOR);
 define('CORE', APP . 'Core' . DIRECTORY_SEPARATOR);
 define('DB_FILE', ROOT . 'db' . DIRECTORY_SEPARATOR . 'database.sqlite');
 define('SQL_FILE', ROOT . 'sql' . DIRECTORY_SEPARATOR . 'database.sql');
-
-header("Access-Control-Allow-Origin: *");
 
 $app = new App\Core\Router();
