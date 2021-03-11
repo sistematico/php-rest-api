@@ -10,9 +10,9 @@
 //}
 
 header('Access-Control-Allow-Origin: https://rest.lucasbrum.net');
-header('Access-Control-Allow-Credentials: true');
-header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, X-Auth-Token, Authorization, X-Requested-With');
+#header('Access-Control-Allow-Credentials: true');
+#header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+#header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, X-Auth-Token, Authorization, X-Requested-With');
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 

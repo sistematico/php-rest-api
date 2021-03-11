@@ -35,13 +35,14 @@ class UserController
                 exit;
             }
             
-        } else if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+        //} else if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
-        } else if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        //} else if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
             
-        } else {
-            $this->notAllowed();
         }
+        //else {
+        //    $this->notAllowed();
+        //}
     }
 
     public function index()
