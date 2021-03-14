@@ -58,12 +58,12 @@ export const ApiHandler = {
 
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
-        headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
+        //headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
 
         const body = { id }
         const options = { mode: 'cors', credentials: 'include', method: 'POST', headers, body: JSON.stringify(body) }
 
-        fetch('https://api.lucasbrum.net/user/delete', options)
+        fetch('https://api.lucasbrum.net/user/delete/' + id, options)
             .then(response => response.json())
             .then(json => {
                 switch (json.httpStatusCode) {
