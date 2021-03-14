@@ -65,7 +65,7 @@ class User extends Database
     public function delete($id): array
     {
         try {
-            $stmt = $this->db->prepare("DELETE FROM users WHERE id LIKE :id LIMIT 1");
+            $stmt = $this->db->prepare("DELETE FROM users WHERE id = :id LIMIT 1");
             $stmt->execute([':id' => $id]);
             if ($stmt->rowCount() === 1)
                 return ['success' => true, 'statusCode' => 201, 'message' => "Sucesso ao apagar o ID: {$id}."];
