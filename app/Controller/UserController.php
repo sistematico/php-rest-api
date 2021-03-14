@@ -43,6 +43,12 @@ class UserController
 
     public function update($id)
     {
+        if (!isset($id)) {
+            Response::setResponse(false, 400, 'User ID not supplied.');
+            Response::send();
+            exit;
+        }
+
         $User = new User();
         $user = $User->update($id, $this->json->fullname, $this->json->username, $this->json->email, $this->json->password);
         Response::setResponse($user['success'], $user['statusCode'], $user['message']);
@@ -52,6 +58,12 @@ class UserController
 
     public function delete($id)
     {
+        if (!isset($id)) {
+            Response::setResponse(false, 400, 'User ID not supplied.');
+            Response::send();
+            exit;
+        }
+
         $User = new User();
         $user = $User->delete($id);        
         Response::setResponse($user['success'], $user['statusCode'], $user['message']);

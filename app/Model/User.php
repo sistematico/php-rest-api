@@ -45,13 +45,13 @@ class User extends Database
             return ['success' => false, 'statusCode' => 500, 'message' => 'Erro ao inserir usuário, possivelmente usuário ou senha já existem.'];
         }
 
-        //return ['success' => false, 'statusCode' => 500, 'message' => 'Erro ao inserir dados.'];
+        return ['success' => false, 'statusCode' => 500, 'message' => 'Erro ao inserir dados.'];
     }
 
     public function update($id, $fullname, $username, $email, $password): array
     {
         try {
-            $stmt = $this->db->prepare('UPDATE users SET fullname = :fullname, username = :username, email = :email, password = :password WHERE id = :id)');
+            $stmt = $this->db->prepare("UPDATE users SET fullname = :fullname, username = :username, email = :email, password = :password WHERE id = :id");
             $stmt->execute([':id' => $id, ':fullname' => $fullname, ':username' => $username, ':email' => $email, ':password' => $password]);
             return ['success' => true, 'statusCode' => 201, 'message' => 'Sucesso ao atualizar os dados.'];
         } catch (PDOException $e) {
@@ -59,13 +59,13 @@ class User extends Database
             return ['success' => false, 'statusCode' => 500, 'message' => 'Erro ao atualizar usuário.'];
         }
 
-        //return ['success' => false, 'statusCode' => 500, 'message' => 'Erro ao atualizar dados.'];
+        return ['success' => false, 'statusCode' => 500, 'message' => 'Erro ao atualizar dados.'];
     }
 
     public function delete($id): array
     {
         try {
-            $stmt = $this->db->prepare('DELETE FROM users WHERE id LIKE :id');
+            $stmt = $this->db->prepare("DELETE FROM users WHERE id LIKE :id LIMIT 1");
             $stmt->execute([':id' => $id]);
             if ($stmt->rowCount() === 1)
                 return ['success' => true, 'statusCode' => 201, 'message' => "Sucesso ao apagar o ID: {$id}."];
