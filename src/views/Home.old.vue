@@ -35,7 +35,6 @@
         <th scope="col">Nome</th>
         <th scope="col">Usuário</th>
         <th scope="col">E-mail</th>
-        <th scope="col">Apagar</th>
       </tr>
       </thead>
       <tbody>
@@ -44,11 +43,10 @@
         <td>{{ item.fullname }}</td>
         <td>{{ item.username }}</td>
         <td>{{ item.email }}</td>
-        <td><a href="#" @click.prevent="del(item.id)">del</a></td>
       </tr>
       </tbody>
     </table>
-    <Pagination @to-parent="fromChild" ref="pagination" />
+    <Pagination :registros="registros" @toparent="fromChild" ref="pagination" />
   </div>
 </template>
 <script>
@@ -60,11 +58,11 @@ export default {
   components: { Pagination },
   data() {
     return {
+      registros: [],
       registrosPaginados: [],
       user: { nome: '', usuario: '', email: '', senha: '' },
       mensagem: '',
       alertClass: 'alert alert-primary',
-      timestamp: 0
     };
   },
   mounted() {
@@ -74,15 +72,9 @@ export default {
     fromChild(value) {
       this.registrosPaginados = value
     },
-    add() {
+    addUser() {
+      // add (app, nome, usuario, email, senha) {
       ApiHandler.add(this, this.user.nome, this.user.usuario, this.user.email, this.user.senha)
-    },
-    del(id) {
-      ApiHandler.del(this, id)
-    }
-  },
-  watch: {
-    timestamp: function() {
       ApiHandler.fetch(this)
       this.$refs.pagination.pagina = this.$refs.pagination.total
     }
