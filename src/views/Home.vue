@@ -44,7 +44,7 @@
         <td>{{ item.fullname }}</td>
         <td>{{ item.username }}</td>
         <td>{{ item.email }}</td>
-        <td><a href="#" @click.prevent="del(item.id)">del</a></td>
+        <td><a href="#" @click.prevent="delUser(item.id)">del</a></td>
       </tr>
       </tbody>
     </table>
@@ -74,11 +74,13 @@ export default {
     fromChild(value) {
       this.registrosPaginados = value
     },
-    add() {
+    addUser() {
       ApiHandler.add(this, this.user.nome, this.user.usuario, this.user.email, this.user.senha)
+      ApiHandler.fetch(this)
     },
-    del(id) {
+    delUser(id) {
       ApiHandler.del(this, id)
+      ApiHandler.fetch(this)
     }
   },
   watch: {

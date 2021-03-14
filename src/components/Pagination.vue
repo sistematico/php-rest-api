@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       pagina: 0,
-      total: 1,
+      total: 0,
       tamanho: 5,
       registros: []
     };
@@ -42,13 +42,15 @@ export default {
       this.paginacao();
     },
     paginacao() {
-      let l = this.registros.length;
-      let s = this.tamanho;
-      this.total = Math.ceil(l / s) - 1;
+      if (this.registros !== 0) {
+        let l = this.registros.length;
+        let s = this.tamanho;
+        this.total = Math.ceil(l / s) - 1;
 
-      let inicio = this.pagina * this.tamanho;
-      let fim = inicio + this.tamanho;
-      this.$emit('to-parent', this.registros.slice(inicio, fim));
+        let inicio = this.pagina * this.tamanho;
+        let fim = inicio + this.tamanho;
+        this.$emit('to-parent', this.registros.slice(inicio, fim));
+      }
     },
   },
   watch: {

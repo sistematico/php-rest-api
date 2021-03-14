@@ -14,13 +14,18 @@ export const ApiHandler = {
                     default:
                         app.alertClass = 'alert alert-danger'
                 }
-                //app.$refs.pagination.calculoPaginacao(json.data)
-                app.$refs.pagination.registros = json.data
+                //if (Object.keys(json.data).length !== 0) {
+                if (typeof json.data !== 'undefined') {
+                    app.$refs.pagination.registros = json.data
+                } else {
+                    app.$refs.pagination.registros = json.data = []
+                }
                 app.mensagem = json.message
             }).catch(error => {
                 app.alertClass = 'alert alert-danger'
                 app.mensagem = 'Houve um erro na solicitação: ' + error
-        })
+            })
+        app.timestamp = Math.floor(+new Date() / 1000)
     },
     add: function (app, nome, usuario, email, senha) {
         const username = 'lucas', password = '123'
@@ -35,22 +40,22 @@ export const ApiHandler = {
         const options = { mode: 'cors', credentials: 'include', method: 'POST', headers: headers, body: JSON.stringify(body) }
 
         fetch('https://api.lucasbrum.net/user/insert', options)
-        .then(response => response.json())
-        .then(json => {
-            switch (json.httpStatusCode) {
-                case 200:
-                case 201:
-                    app.alertClass = 'alert alert-success'
-                    break
-                default:
-                    app.alertClass = 'alert alert-danger'
-            }
-            app.timestamp = Math.floor(+new Date() / 1000)
-            app.mensagem = json.message
-        }).catch(error => {
-            app.alertClass = 'alert alert-danger'
-            app.mensagem = 'Houve um erro na solicitação: ' + error
-        })
+            .then(response => response.json())
+            .then(json => {
+                switch (json.httpStatusCode) {
+                    case 200:
+                    case 201:
+                        app.alertClass = 'alert alert-success'
+                        break
+                    default:
+                        app.alertClass = 'alert alert-danger'
+                }
+                app.mensagem = json.message
+            }).catch(error => {
+                app.alertClass = 'alert alert-danger'
+                app.mensagem = 'Houve um erro na solicitação: ' + error
+            })
+        //this.fetch(app)
     },
     del: function (app, id) {
 
@@ -77,9 +82,9 @@ export const ApiHandler = {
                 app.timestamp = Math.floor(+new Date() / 1000)
                 app.mensagem = json.message
             }).catch(error => {
-            app.alertClass = 'alert alert-danger'
-            app.mensagem = 'Houve um erro na solicitação: ' + error
-        })
-
+                app.alertClass = 'alert alert-danger'
+                app.mensagem = 'Houve um erro na solicitação: ' + error
+            })
+        //this.fetch(app)
     }
 };
