@@ -7,42 +7,15 @@ use App\Core\Response;
 
 class UserController
 {
-    private $data;
     private $json;
 
     public function __construct()
     {   
-       
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-
-        } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PATCH') {
             $this->checkContentType();
-            $this->data = file_get_contents('php://input');     
-        
-            if (!$this->json = json_decode($this->data)) {
-                Response::setResponse(false, 400, "O corpo da requisição não é um JSON válido.");
-                Response::send();
-                exit;
-            }
-            
-        } else if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
-            $this->checkContentType();
-            $this->data = file_get_contents('php://input');     
-        
-            if (!$this->json = json_decode($this->data)) {
-                Response::setResponse(false, 400, "O corpo da requisição não é um JSON válido.");
-                Response::send();
-                exit;
-            }
-            
-        //} else if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-
-        //} else if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-            
+            $this->json = json_decode(file_get_contents('php://input'));
+            $this->invalidJson($this->json);
         }
-        //else {
-        //    $this->notAllowed();
-        //}
     }
 
     public function index()
@@ -54,27 +27,25 @@ class UserController
     {
         $User = new User();
         $user = $User->list();
-        Response::setResponse($user['sucess'], $user['statusCode'], $user['message'], $user['list']);
+        Response::setResponse($user['success'], $user['statusCode'], $user['message'], $user['list']);
         Response::send();
         exit;
     }
 
     public function insert()
     {
-        $json = $this->json;
         $User = new User();
-        $user = $User->insert($json->fullname, $json->username, $json->email, $json->password);
-        Response::setResponse($user['sucess'], $user['statusCode'], $user['message']);
+        $user = $User->insert($this->json->fullname, $this->json->username, $this->json->email, $this->json->password);
+        Response::setResponse($user['success'], $user['statusCode'], $user['message']);
         Response::send();
         exit;
     }
 
     public function update($id)
     {
-        $json = $this->json;
         $User = new User();
-        $user = $User->update($id, $json->fullname, $json->username, $json->email, $json->password);
-        Response::setResponse($user['sucess'], $user['statusCode'], $user['message']);
+        $user = $User->update($id, $this->json->fullname, $this->json->username, $this->json->email, $this->json->password);
+        Response::setResponse($user['success'], $user['statusCode'], $user['message']);
         Response::send();
         exit;
     }
@@ -83,7 +54,7 @@ class UserController
     {
         $User = new User();
         $user = $User->delete($id);        
-        Response::setResponse($user['sucess'], $user['statusCode'], $user['message']);
+        Response::setResponse($user['success'], $user['statusCode'], $user['message']);
         Response::send();        
         exit;
     }
@@ -92,7 +63,7 @@ class UserController
     {
         $User = new User();
         $user = $User->install();
-        Response::setResponse($user['sucess'], $user['statusCode'], $user['message']);
+        Response::setResponse($user['success'], $user['statusCode'], $user['message']);
         Response::send();
         exit;
     }
@@ -106,6 +77,14 @@ class UserController
     public function checkContentType() {
         if ($_SERVER['CONTENT_TYPE'] !== 'application/json') {
             Response::setResponse(false, 400, "O tipo de conteúdo precisa ser no formato JSON.");
+            Response::send();
+            exit;
+        }
+    }
+
+    public function invalidJson($json) {
+        if (!$json) {
+            Response::setResponse(false, 400, "O corpo da requisição não é um JSON válido.");
             Response::send();
             exit;
         }

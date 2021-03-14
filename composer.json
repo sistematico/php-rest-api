@@ -1,5 +1,6 @@
 {
     "name": "sistematico/php-rest-api",
+    "description": "",
     "type": "project",
     "license": "Unlicense",
     "authors": [
@@ -8,7 +9,10 @@
             "email": "lucas@archlinux.com.br"
         }
     ],
-    "require": {},
+    "require": {
+      "ext-json": "*",
+      "ext-pdo": "*"
+    },
     "autoload": {
         "psr-4": {
             "App\\": "app/"
