@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS 'users' (
   'username' TEXT NOT NULL UNIQUE,
   'email' TEXT NOT NULL UNIQUE,
   'password' TEXT NOT NULL,
+  'secret' TEXT NOT NULL UNIQUE,
   'active' TEXT NOT NULL DEFAULT 'Y',
   'loginattempts' INTEGER NOT NULL DEFAULT '0'
 );

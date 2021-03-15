@@ -2,12 +2,14 @@
 
 namespace App\Model;
 
+use App\Model\Jwt;
 use App\Core\Database;
 use PDO;
 use PDOException;
 
 class User extends Database
 {
+    const VALID = '3600';
     private array $data = [];
 
     public function install(): array
@@ -33,11 +35,11 @@ class User extends Database
         return ['success' => true, 'statusCode' => 201, 'message' => 'Lista de usuários.', 'list' => $this->data];
     }
 
-    public function insert($fullname, $username, $email, $password): array
+    public function insert($fullname, $username, $email, $password, $secret): array
     {
         try {
-            $stmt = $this->db->prepare('INSERT INTO users (fullname, username, email, password) VALUES (:fullname, :username, :email, :password)');
-            $stmt->execute([':fullname' => $fullname, ':username' => $username, ':email' => $email, ':password' => $password]);
+            $stmt = $this->db->prepare('INSERT INTO users (fullname, username, email, password, secret) VALUES (:fullname, :username, :email, :password, :secret)');
+            $stmt->execute([':fullname' => $fullname, ':username' => $username, ':email' => $email, ':password' => $password, ':secret' => $secret]);
             return ['success' => true, 'statusCode' => 201, 'message' => 'Sucesso ao inserir os dados.'];
         } catch (PDOException $e) {
             unset($e);
@@ -74,5 +76,71 @@ class User extends Database
         }
 
         return ['success' => false, 'statusCode' => 500, 'message' => "Erro ao apagar o ID: {$id}, possivelmente este id não existe."];
+    }
+
+    public function signup($fullname, $username, $email, $password, $secret): array
+    {
+        if ($this->userNotExist($username, $email))
+            return ['success' => false, 'statusCode' => 401, 'message' => 'Usuário e/ou e-mail já existem.'];
+
+        $this->insert($fullname, $username, $email, $password, $secret);
+    }
+
+    public function signin($login, $password): array
+    {
+        if (!$user = $this->user($login, $password))
+            return ['success' => false, 'statusCode' => 401, 'message' => 'Usuário não encontrado ou senha incorreta.'];
+
+        return ['success' => true, 'statusCode' => 201, 'message' => 'Usuário logado com sucesso.', 'token' => $this->createToken($user['id'], $user['secret'])];
+    }
+
+    public function user($login, $password): array
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT id, fullname, username, email, password, secret, active FROM users WHERE username = :username AND password = :password LIMIT 1");
+            $stmt->execute([':username' => $login, ':password' => $password]);
+            if ($user = $stmt->fetch(PDO::FETCH_ASSOC))
+                if (password_verify($password, $user['password']))
+                    return $user;
+        } catch (PDOException $e) {
+            return false;
+        }
+
+        return false;
+    }
+
+    public function userNotExist($login, $email): bool
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM users WHERE username = :username OR email = :email LIMIT 1");
+            $stmt->execute([':username' => $login, ':email' => $email]);
+            if (!$stmt->fetch(PDO::FETCH_ASSOC))
+                return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+
+        return false;
+    }
+
+    function getToken($secret)
+    {
+        $headers = getallheaders();
+
+        if (array_key_exists('Authorization', $headers))
+            return false;
+
+        $token = Jwt::decode($headers['Authorization'], $secret);
+
+        if ($token->exp <= time())
+            return false;
+         
+        return $token->id;
+    }
+
+    function createToken($id, $secret)
+    {
+        $token = ['id' => $id, 'exp' => time() + self::VALID];
+        return json_encode(['token' => Jwt::encode($token, $secret)]);
     }
 }
