@@ -21,7 +21,6 @@
 export default {
   name: "Pagination",
   props: {
-    //registros: { type: Array },
     toParent: { type: Function }
   },
   data() {

@@ -44,7 +44,7 @@ export default {
   methods: {
     addUser() {
       ApiHandler.add(this, this.user.nome, this.user.usuario, this.user.email, this.user.senha)
-      ApiHandler.fetch(this)
+      //ApiHandler.fetch(this)
     }
   }
 }

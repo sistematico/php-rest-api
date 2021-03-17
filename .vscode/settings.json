@@ -1,0 +1,16 @@
+{
+    "vetur.ignoreProjectWarning": true,
+    "files.exclude": {
+        ".browserslistrc": true,
+        ".eslintrc.js": true,
+        "**/.github": true,
+        "**/.idea": true,
+        "**/.vscode": true,
+        "**/dist": true,
+        "**/node_modules": true,
+        "**/vendor": true,
+        "babel.config.js": true,
+        "LICENSE": true,
+        "package-lock.json": true
+    }
+}

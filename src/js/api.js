@@ -27,8 +27,8 @@ export const ApiHandler = {
             })
         app.timestamp = Math.floor(+new Date() / 1000)
     },
-    add: function (app, nome, usuario, email, senha) {
-        const username = 'lucas', password = '123'
+    add: function (app, fullname, username, email, password) {
+        let secret = Math.floor(+new Date() / 1000)
         const headers = new Headers();
 
         headers.append('Content-Type', 'application/json');
@@ -36,7 +36,7 @@ export const ApiHandler = {
         headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
         headers.append('Origin', 'http://localhost:3000');
 
-        const body = { fullname: nome, username: usuario, email: email, password: senha }
+        const body = { fullname, username, email, password, secret }
         const options = { mode: 'cors', credentials: 'include', method: 'POST', headers: headers, body: JSON.stringify(body) }
 
         fetch('https://api.lucasbrum.net/user/add', options)
@@ -55,7 +55,6 @@ export const ApiHandler = {
                 app.alertClass = 'alert alert-danger'
                 app.mensagem = 'Houve um erro na solicitação: ' + error
             })
-        //this.fetch(app)
     },
     del: function (app, id) {
 
@@ -85,6 +84,5 @@ export const ApiHandler = {
                 app.alertClass = 'alert alert-danger'
                 app.mensagem = 'Houve um erro na solicitação: ' + error
             })
-        //this.fetch(app)
     }
 };
