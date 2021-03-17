@@ -1,8 +1,12 @@
-# PHP REST API
+# PHP REST API (Front-End)
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/sistematico/php-rest-api/Deploy?label=Github%20Action&logo=github&logoColor=white&style=flat-square)](https://github.com/sistematico/php-rest-api/actions/workflows/vuejs.yml)
 
-Projeto de API REST usando o PHP.
+Projeto de API REST usando o PHP (**Front-End**).
+
+## Instalação
+
+```git clone -b frontend https://github.com/sistematico/php-rest-api.git```
 
 ## Ramificações
 
