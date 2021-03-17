@@ -1,5 +1,6 @@
 {
   "name": "php-rest-api",
+  "description": "Um exemplo de uma API REST em Vue.js e PHP puro.",
   "version": "0.1.0",
   "private": true,
   "scripts": {

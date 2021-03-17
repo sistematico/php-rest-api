@@ -20,7 +20,7 @@ export const ApiHandler = {
                 } else {
                     app.$refs.pagination.registros = json.data = []
                 }
-                app.mensagem = json.message
+                app.mensagem = json.messages
             }).catch(error => {
                 app.alertClass = 'alert alert-danger'
                 app.mensagem = 'Houve um erro na solicitação: ' + error
@@ -50,7 +50,8 @@ export const ApiHandler = {
                     default:
                         app.alertClass = 'alert alert-danger'
                 }
-                app.mensagem = json.message
+                console.log(json)
+                app.mensagem = json.messages
             }).catch(error => {
                 app.alertClass = 'alert alert-danger'
                 app.mensagem = 'Houve um erro na solicitação: ' + error
@@ -79,7 +80,7 @@ export const ApiHandler = {
                         app.alertClass = 'alert alert-danger'
                 }
                 app.timestamp = Math.floor(+new Date() / 1000)
-                app.mensagem = json.message
+                app.mensagem = json.messages
             }).catch(error => {
                 app.alertClass = 'alert alert-danger'
                 app.mensagem = 'Houve um erro na solicitação: ' + error
