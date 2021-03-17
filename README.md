@@ -51,6 +51,15 @@ server {
 }
 ```
 
+## Endpoints
+
+| Endpoint | Método | Ação |
+| -------- | :-------: | -------: |
+| /user/list | GET | Lista os usuários |
+| /user/add | POST | Adiciona um usuário |
+| /user/delete/1 | POST | Remove o usuário ID 1 |
+| /user/update/1 | POST | Atualiza o usuário ID 1 |
+
 ## Contribua!
 
 - Viu algum erro ou tem alguma sugestão? Abra uma [issue](https://github.com/sistematico/php-rest-api/issues/new)!

@@ -35,23 +35,35 @@ class User extends Database
         return ['success' => true, 'statusCode' => 201, 'message' => 'Lista de usuários.', 'list' => $this->data];
     }
 
-    public function insert($fullname, $username, $email, $password, $secret): array
+    public function add(array $params): array
     {
+        foreach ($params as $key => $value) {
+            if (empty($params[$key]))
+                return ['success' => false, 'statusCode' => 500, 'message' => "{$key} não pode estar vazio."];
+        }
+
+        extract($params);
+
         try {
             $stmt = $this->db->prepare('INSERT INTO users (fullname, username, email, password, secret) VALUES (:fullname, :username, :email, :password, :secret)');
             $stmt->execute([':fullname' => $fullname, ':username' => $username, ':email' => $email, ':password' => $password, ':secret' => $secret]);
             return ['success' => true, 'statusCode' => 201, 'message' => 'Sucesso ao inserir os dados.'];
         } catch (PDOException $e) {
-            unset($e);
-            //return ['success' => false, 'statusCode' => 500, 'message' => "Erro ao inserir dados: " . $e->getMessage()];
-            return ['success' => false, 'statusCode' => 500, 'message' => 'Erro ao inserir usuário, possivelmente usuário ou senha já existem.'];
+            return ['success' => false, 'statusCode' => 500, 'message' => "Erro ao inserir usuário: " . $e->getMessage()];
         }
 
         return ['success' => false, 'statusCode' => 500, 'message' => 'Erro ao inserir dados.'];
     }
 
-    public function update($id, $fullname, $username, $email, $password): array
+    public function update(int $id, array $params): array
     {
+        foreach ($params as $key => $value) {
+            if (empty($params[$key]))
+                return ['success' => false, 'statusCode' => 500, 'message' => "{$key} não pode estar vazio."];
+        }
+
+        extract($params);
+
         try {
             $stmt = $this->db->prepare("UPDATE users SET fullname = :fullname, username = :username, email = :email, password = :password WHERE id = :id");
             $stmt->execute([':id' => $id, ':fullname' => $fullname, ':username' => $username, ':email' => $email, ':password' => $password]);
@@ -78,13 +90,13 @@ class User extends Database
         return ['success' => false, 'statusCode' => 500, 'message' => "Erro ao apagar o ID: {$id}, possivelmente este id não existe."];
     }
 
-    public function signup($fullname, $username, $email, $password, $secret): array
-    {
-        if ($this->userNotExist($username, $email))
-            return ['success' => false, 'statusCode' => 401, 'message' => 'Usuário e/ou e-mail já existem.'];
+    // public function signup($fullname, $username, $email, $password, $secret): array
+    // {
+    //     if ($this->userNotExist($username, $email))
+    //         return ['success' => false, 'statusCode' => 401, 'message' => 'Usuário e/ou e-mail já existem.'];
 
-        $this->insert($fullname, $username, $email, $password, $secret);
-    }
+    //     $this->add($fullname, $username, $email, $password, $secret);
+    // }
 
     public function signin($login, $password): array
     {

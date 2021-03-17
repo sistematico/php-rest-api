@@ -1,11 +1,15 @@
+DROP TABLE IF EXISTS 'sessions';
+DROP TABLE IF EXISTS 'users';
+DROP TABLE IF EXISTS 'tasks';
+
 CREATE TABLE IF NOT EXISTS 'sessions' (
   'id' INTEGER NOT NULL PRIMARY KEY,
   'userid' INTEGER NOT NULL,
   'accesstoken' TEXT NOT NULL UNIQUE,
-  'accesstokenexpiry' datetime NOT NULL,
+  'accesstokenexpiry' INTEGER NOT NULL,
   'refreshtoken' TEXT NOT NULL UNIQUE,
-  'refreshtokenexpiry' datetime NOT NULL,
-  FOREIGN KEY(userid) REFERENCES tblusers(id)
+  'refreshtokenexpiry' INTEGER NOT NULL,
+  FOREIGN KEY(userid) REFERENCES users(id)
 );
 
 CREATE TABLE IF NOT EXISTS 'users' (
@@ -29,3 +33,5 @@ CREATE TABLE IF NOT EXISTS 'users' (
 --   FOREIGN KEY(userid) REFERENCES users(id)
 -- );
 
+INSERT INTO 'users' (fullname, username, email, password, secret) VALUES ('Administrador', 'admin', 'admin@admin.com', 'admin', 'secret1');
+INSERT INTO 'users' (fullname, username, email, password, secret) VALUES ('Usuário', 'user', 'user@user.com', 'password', 'secret2');

@@ -7,13 +7,13 @@ use App\Core\Response;
 
 class UserController
 {
-    private $json;
+    private array $json;
 
     public function __construct()
     {   
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PATCH') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PATCH' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
             $this->checkContentType();
-            $this->json = json_decode(file_get_contents('php://input'));
+            $this->json = json_decode(file_get_contents('php://input'), true);
             $this->invalidJson($this->json);
         }
     }
@@ -32,10 +32,10 @@ class UserController
         exit;
     }
 
-    public function insert()
+    public function add()
     {
         $User = new User();
-        $user = $User->insert($this->json->fullname, $this->json->username, $this->json->email, $this->json->password);
+        $user = $User->add($this->json);
         Response::setResponse($user['success'], $user['statusCode'], $user['message']);
         Response::send();
         exit;
@@ -50,7 +50,7 @@ class UserController
         }
 
         $User = new User();
-        $user = $User->update($id, $this->json->fullname, $this->json->username, $this->json->email, $this->json->password);
+        $user = $User->update($id, $this->json);
         Response::setResponse($user['success'], $user['statusCode'], $user['message']);
         Response::send();
         exit;
@@ -95,7 +95,7 @@ class UserController
     }
 
     public function invalidJson($json) {
-        if (!$json) {
+        if (!isset($json) || empty($json)) {
             Response::setResponse(false, 400, "O corpo da requisição não é um JSON válido.");
             Response::send();
             exit;

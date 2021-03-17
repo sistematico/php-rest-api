@@ -1,0 +1,12 @@
+{
+    "files.exclude": {
+        "**/.github": true,
+        "**/.idea": true,
+        "**/.vscode": true,
+        "**/dist": true,
+        "**/node_modules": true,
+        "**/vendor": true,
+        "composer.lock": true,
+        "LICENSE": true
+    }
+}
