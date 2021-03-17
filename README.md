@@ -2,7 +2,11 @@
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/sistematico/php-rest-api/Deploy?label=Github%20Action&logo=github&logoColor=white&style=flat-square)](https://github.com/sistematico/ptp-rest-api/actions?query=workflow%3ADeploy%20PHP)
 
-Projeto de API REST usando o PHP(Back-End).
+Projeto de API REST usando o PHP (**Back-End**).
+
+## Instalação
+
+```git clone -b backend https://github.com/sistematico/php-rest-api.git```
 
 ## Ramificações
 
