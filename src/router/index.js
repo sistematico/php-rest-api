@@ -13,9 +13,15 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/add',
+    path: '/adicionar',
     name: 'Adicionar',
     component: () => import(/* webpackChunkName: "add" */ '../views/Adicionar.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    //name: 'NotFound',
+    redirect: "/"
+    //component: () => import(/* webpackChunkName: "add" */ '../views/NotFound.vue')
   }
 ]
 

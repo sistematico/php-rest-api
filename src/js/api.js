@@ -39,7 +39,7 @@ export const ApiHandler = {
         const body = { fullname: nome, username: usuario, email: email, password: senha }
         const options = { mode: 'cors', credentials: 'include', method: 'POST', headers: headers, body: JSON.stringify(body) }
 
-        fetch('https://api.lucasbrum.net/user/insert', options)
+        fetch('https://api.lucasbrum.net/user/add', options)
             .then(response => response.json())
             .then(json => {
                 switch (json.httpStatusCode) {
