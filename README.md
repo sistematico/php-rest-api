@@ -1,13 +1,14 @@
 # PHP REST API
 
 Projeto de API REST usando o PHP.
+Use as ramificações logo abaixo para navegar entre o **front-end** e **back-end** do projeto.
 
 ## Ramificações
 
-| Ramificação                  |            | Status    |
-| ---------------------------- |:------------------:| ---------:|
-| [Back-End](/../../tree/backend)     |  | :recycle: |
-| [Front-End](/../../tree/frontend)     |                | :recycle: |
+| Ramificação | Status |
+| ----- | -----: |
+| [Back-End](/../../tree/backend) | :recycle: |
+| [Front-End](/../../tree/frontend) | :recycle: |
 
 ## Contribua!
 
