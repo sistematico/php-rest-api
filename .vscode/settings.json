@@ -1,5 +1,4 @@
 {
-    "vetur.ignoreProjectWarning": true,
     "files.exclude": {
         ".browserslistrc": true,
         ".eslintrc.js": true,
