@@ -26,7 +26,7 @@
       </tr>
       </tbody>
     </table>
-    <Pagination @to-parent="fromChild" ref="pagination" />
+    <Pagination @to-parent="fromChild" :registros="registros" ref="pagination" />
   </div>
 </template>
 <script>
@@ -38,6 +38,7 @@ export default {
   components: { Pagination },
   data() {
     return {
+      registros: [],
       registrosPaginados: [],
       user: { nome: '', usuario: '', email: '', senha: '' },
       mensagem: '',
@@ -57,9 +58,11 @@ export default {
     }
   },
   watch: {
-    timestamp: function() {
+    // pagina: function () {
+    //   this.paginacao()
+    // },
+    registros: function() {
       ApiHandler.fetch(this)
-      this.$refs.pagination.pagina = this.$refs.pagination.total
     }
   }
 }

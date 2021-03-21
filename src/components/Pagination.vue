@@ -21,15 +21,15 @@
 export default {
   name: "Pagination",
   props: {
+    registros: { type: Array },
     toParent: { type: Function }
   },
   data() {
     return {
       pagina: 0,
-      total: 0,
-      tamanho: 5,
-      registros: []
-    };
+      total: 1,
+      tamanho: 3,
+    }
   },
   methods: {
     proxima() {
@@ -50,17 +50,18 @@ export default {
         let fim = inicio + this.tamanho
         this.$emit('to-parent', this.registros.slice(inicio, fim))
       } else {
+        this.total = 1
         this.$emit('to-parent', this.registros)
       }
     },
   },
   watch: {
-    pagina: function () {
-      this.paginacao()
-    },
+    // pagina: function () {
+    //   this.paginacao()
+    // },
     registros: function() {
       this.paginacao()
     }
-  },
-};
+  }
+}
 </script>

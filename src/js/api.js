@@ -14,20 +14,21 @@ export const ApiHandler = {
                     default:
                         app.alertClass = 'alert alert-danger'
                 }
-                //if (Object.keys(json.data).length !== 0) {
                 if (typeof json.data !== 'undefined') {
-                    app.$refs.pagination.registros = json.data
+                    app.registros = json.data
                 } else {
-                    app.$refs.pagination.registros = json.data = []
+                    app.registros = json.data = []
                 }
                 app.mensagem = json.messages
             }).catch(error => {
                 app.alertClass = 'alert alert-danger'
                 app.mensagem = 'Houve um erro na solicitação: ' + error
             })
-        app.timestamp = Math.floor(+new Date() / 1000)
     },
     add: function (app, fullname, username, email, password) {
+        app.loading = true
+        app.btnText = 'Processando...'
+
         let secret = Math.floor(+new Date() / 1000)
         const headers = new Headers();
 
@@ -45,22 +46,23 @@ export const ApiHandler = {
                 switch (json.httpStatusCode) {
                     case 200:
                     case 201:
+                        app.btnText = 'Adicionado'
                         app.alertClass = 'alert alert-success'
                         break
                     default:
+                        app.btnText = 'Adicionar'
                         app.alertClass = 'alert alert-danger'
                 }
-                console.log(json)
                 app.mensagem = json.messages
             }).catch(error => {
+                app.btnText = 'Adicionar'
                 app.alertClass = 'alert alert-danger'
                 app.mensagem = 'Houve um erro na solicitação: ' + error
             })
+        app.loading = false
     },
     del: function (app, id) {
-
         const headers = new Headers();
-
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
         //headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
@@ -79,7 +81,6 @@ export const ApiHandler = {
                     default:
                         app.alertClass = 'alert alert-danger'
                 }
-                app.timestamp = Math.floor(+new Date() / 1000)
                 app.mensagem = json.messages
             }).catch(error => {
                 app.alertClass = 'alert alert-danger'

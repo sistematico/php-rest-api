@@ -6,7 +6,7 @@
       {{ mensagem }}
     </div>
 
-    <form class="row g-3 justify-content-center" @submit.prevent="addUser()">
+    <form class="row g-3 justify-content-center" @submit.prevent="addUser()" v-if="btnText !== 'Adicionado'">
       <div class="col-auto">
         <label for="nome" class="visually-hidden">Nome</label>
         <input v-model="user.nome" type="text" class="form-control" id="nome" placeholder="Fulano de Tal">
@@ -24,7 +24,10 @@
         <input v-model="user.senha" type="password" class="form-control" id="senha" placeholder="Senha" autocomplete="current-password">
       </div>
       <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Enviar</button>
+        <button type="submit" class="btn btn-primary mb-3" :disabled="btnText != 'Adicionar'">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="false" v-if="btnText === 'Processando...'"></span>
+          {{ btnText }}
+        </button>
       </div>
     </form>
   </div>
@@ -36,6 +39,8 @@ export default {
   name: "Adicionar",
   data() {
     return {
+      loading: false,
+      btnText: 'Adicionar',
       user: { nome: '', usuario: '', email: '', senha: '' },
       mensagem: '',
       alertClass: 'alert alert-primary'
