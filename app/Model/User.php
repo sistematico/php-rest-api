@@ -9,7 +9,7 @@ use PDOException;
 
 class User extends Database
 {
-    const VALID = '3600';
+    const VALID = 3600;
     private array $data = [];
 
     public function install(): array
@@ -38,8 +38,9 @@ class User extends Database
     public function add(array $params): array
     {
         foreach ($params as $key => $value) {
-            if (empty($params[$key]))
+            if (empty($params[$key])) {
                 return ['success' => false, 'statusCode' => 500, 'message' => "{$key} não pode estar vazio."];
+            }
         }
 
         extract($params);
