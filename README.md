@@ -78,7 +78,7 @@ server {
 
 ## Collection
 
-- [Insomnia](https://github.com/sistematico/php-rest-api)
+- [Insomnia](https://raw.githubusercontent.com/sistematico/php-rest-api/backend/3rd/insomnia.json)
 
 
 ## Contribua!
