@@ -76,6 +76,11 @@ server {
 }
 ```
 
+## Collection
+
+- [Insomnia](https://github.com/sistematico/php-rest-api)
+
+
 ## Contribua!
 
 - Viu algum erro ou tem alguma sugestão? Abra uma [issue](https://github.com/sistematico/php-rest-api/issues/new)!
