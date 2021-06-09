@@ -50,7 +50,7 @@ class User extends Database
             $stmt->execute([':fullname' => $fullname, ':username' => $username, ':email' => $email, ':password' => $password, ':secret' => $secret]);
             return ['success' => true, 'statusCode' => 201, 'message' => 'Sucesso ao inserir os dados.'];
         } catch (PDOException $e) {
-            return ['success' => false, 'statusCode' => 500, 'message' => "Erro ao inserir usuário: " . $e->getMessage()];
+            return ['success' => false, 'statusCode' => 500, 'message' => 'Erro ao inserir usuário: ' . $e->getMessage()];
         }
 
         return ['success' => false, 'statusCode' => 500, 'message' => 'Erro ao inserir dados.'];
@@ -85,7 +85,7 @@ class User extends Database
             if ($stmt->rowCount() === 1)
                 return ['success' => true, 'statusCode' => 201, 'message' => "Sucesso ao apagar o ID: {$id}."];
         } catch (PDOException $e) {
-            return ['success' => false, 'statusCode' => 500, 'message' => "Erro ao apagar o id: {$id}: " . $e->getMessage()];
+            return ['success' => false, 'statusCode' => 500, 'message' => 'Erro ao apagar o id: {$id}: ' . $e->getMessage()];
         }
 
         return ['success' => false, 'statusCode' => 500, 'message' => "Erro ao apagar o ID: {$id}, possivelmente este id não existe."];
