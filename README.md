@@ -34,16 +34,15 @@ server {
     ssl_certificate         /etc/letsencrypt/live/site.com/fullchain.pem;
     ssl_certificate_key     /etc/letsencrypt/live/site.com/privkey.pem;
 
-    root                    /var/www/api.site.com/public;
-    index                   index.php;
     server_name             api.site.com;
+    index                   index.php;
+    root                    /var/www/api.site.com/public;
 
     add_header X-Frame-Options "SAMEORIGIN";
     add_header X-XSS-Protection "1; mode=block";
     add_header X-Content-Type-Options "nosniff";
 
     location / {
-        #add_header 'Access-Control-Allow-Origin' '*';
         add_header Access-Control-Allow-Origin $http_origin;
         try_files /$uri /$uri/ /index.php?url=$uri&$args;
     }
