@@ -61,8 +61,20 @@ server {
 | -------- | :-------: | -------: |
 | /user/list | GET | Lista os usuários |
 | /user/add | POST | Adiciona um usuário |
-| /user/delete/1 | POST | Remove o usuário ID 1 |
-| /user/update/1 | POST | Atualiza o usuário ID 1 |
+| /user/delete/1 | DELETE | Remove o usuário ID 1 |
+| /user/update/1 | PATCH | Atualiza o usuário ID 1 |
+
+## JSON de exemplo
+
+```
+{
+	"fullname": "Jason Jones", 
+	"username": "jason",
+	"email": "jason@gmail.com",
+	"password": "jason",
+	"secret": "secret3"
+}
+```
 
 ## Contribua!
 
