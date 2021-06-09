@@ -70,8 +70,8 @@ class User extends Database
             $stmt->execute([':id' => $id, ':fullname' => $fullname, ':username' => $username, ':email' => $email, ':password' => $password]);
             return ['success' => true, 'statusCode' => 201, 'message' => 'Sucesso ao atualizar os dados.'];
         } catch (PDOException $e) {
-            unset($e);
-            return ['success' => false, 'statusCode' => 500, 'message' => 'Erro ao atualizar usuário.'];
+            //unset($e);
+            return ['success' => false, 'statusCode' => 500, 'message' => 'Erro ao atualizar usuário.' . $e->getMessage()];
         }
 
         return ['success' => false, 'statusCode' => 500, 'message' => 'Erro ao atualizar dados.'];
