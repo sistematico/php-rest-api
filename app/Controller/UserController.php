@@ -95,7 +95,8 @@ class UserController
     }
 
     public function invalidJson($json) {
-        if (!isset($json) || empty($json) || $json === null) {
+        json_decode($json);
+        if (json_last_error() !== JSON_ERROR_NONE) {
             Response::setResponse(false, 400, "O corpo da requisição não é um JSON válido.");
             Response::send();
             exit;
