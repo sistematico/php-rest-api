@@ -14,7 +14,12 @@ class UserController
         if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PATCH' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
             $this->checkContentType();
             $this->json = json_decode(file_get_contents('php://input'), true);
-            $this->invalidJson($this->json);
+            
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                Response::setResponse(false, 400, "O corpo da requisição não é um JSON válido.");
+                Response::send();
+                exit;
+            }
         }
     }
 
@@ -89,15 +94,6 @@ class UserController
     public function checkContentType() {
         if ($_SERVER['CONTENT_TYPE'] !== 'application/json') {
             Response::setResponse(false, 400, "O tipo de conteúdo precisa ser no formato JSON.");
-            Response::send();
-            exit;
-        }
-    }
-
-    public function invalidJson($json) {
-        json_decode($json);
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            Response::setResponse(false, 400, "O corpo da requisição não é um JSON válido.");
             Response::send();
             exit;
         }
