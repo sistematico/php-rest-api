@@ -40,7 +40,7 @@ class Router
             }
         } else {
             $page = new UserController();
-            $page->notAllowed();
+            $page->notFound();
         }
     }
 

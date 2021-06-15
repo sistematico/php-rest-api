@@ -91,6 +91,12 @@ class UserController
         exit;
     }
 
+    public function notFound() {
+        Response::setResponse(false, 404, "O endpoint não existe.");
+        Response::send();
+        exit;
+    }
+
     public function checkContentType() {
         if ($_SERVER['CONTENT_TYPE'] !== 'application/json') {
             Response::setResponse(false, 400, "O tipo de conteúdo precisa ser no formato JSON.");
