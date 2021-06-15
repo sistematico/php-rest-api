@@ -30,12 +30,13 @@ export const ApiHandler = {
         app.btnText = 'Processando...'
 
         let secret = Math.floor(+new Date() / 1000)
-        const headers = new Headers();
+        const headers = new Headers()
 
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-        headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
-        headers.append('Origin', 'http://localhost:3000');
+        headers.append('Content-Type', 'application/json')
+        headers.append('Accept', 'application/json')
+        headers.append('Authorization', 'Basic ' + btoa(username + ":" + password))
+        // headers.append('Origin', 'http://localhost:3000');
+        headers.append('Origin', window.location.hostname)
 
         const body = { fullname, username, email, password, secret }
         const options = { mode: 'cors', credentials: 'include', method: 'POST', headers: headers, body: JSON.stringify(body) }
