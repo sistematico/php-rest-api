@@ -33,7 +33,7 @@
 
         <ul class="nav nav-pills">
           <li class="nav-item">
-            <router-link to="/" class="nav-link active">Home</router-link>
+            <router-link to="/" class="nav-link active">Inicio</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/about" class="nav-link">About</router-link>
