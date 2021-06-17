@@ -45,7 +45,7 @@
       <router-view/>
     </main>
     <footer class="pt-5 my-5 text-muted border-top">
-      &copy; 2021 &middot; Lucas Saliés Brum
+      &copy; 2021 Lucas Saliés Brum &middot; Código no <a href="https://github.com/sistematico/php-rest-api">Github</a>
     </footer>
   </div>
 </template>
